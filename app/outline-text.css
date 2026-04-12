@@ -1,0 +1,9 @@
+.outline-text {
+  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.1);
+  color: transparent;
+  transition: -webkit-text-stroke 0.5s ease;
+}
+
+.outline-text:hover {
+  -webkit-text-stroke: 1px rgba(255, 255, 255, 1);
+}
