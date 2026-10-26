@@ -35,24 +35,35 @@
 
   /* ── Modern Theme (Premium Midnight Indigo) ── */
   .theme-modern {
-    --color-black: #020617; 
-    --color-zinc-950: #050816; 
-    --color-zinc-900: #1e1b4b; /* Indigo 950 base */
-    --color-zinc-800: #1e293b; 
+    --color-black: #020617;
+    --color-zinc-950: #050816;
+    --color-zinc-900: #1e1b4b;
+    --color-zinc-800: #1e293b;
     --color-zinc-700: #334155;
     --color-zinc-600: #475569;
     --color-zinc-500: #64748b;
-    --color-zinc-400: #94a3b8; 
+    --color-zinc-400: #94a3b8;
     --color-zinc-300: #cbd5e1;
     --color-white: #ffffff;
-    
+
+    /* Solid base only — ambient glow lives on a fixed layer so it never bands into "sections" */
     background-color: #020617 !important;
-    background-image: 
-      radial-gradient(circle at 50% -20%, #312e81 0%, transparent 50%),
-      radial-gradient(circle at 0% 0%, #1e1b4b 0%, transparent 30%),
-      radial-gradient(circle at 100% 100%, #1e1b4b 0%, transparent 30%) !important;
-    background-attachment: fixed !important;
+    background-image: none !important;
     color: #e2e8f0;
+    isolation: isolate;
+  }
+
+  .theme-modern::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background:
+      radial-gradient(ellipse 90% 55% at 50% 0%, rgba(49, 46, 129, 0.55) 0%, transparent 55%),
+      radial-gradient(ellipse 45% 40% at 0% 35%, rgba(30, 27, 75, 0.45) 0%, transparent 60%),
+      radial-gradient(ellipse 45% 40% at 100% 75%, rgba(30, 27, 75, 0.4) 0%, transparent 60%),
+      #020617;
   }
 
   .theme-modern h1, 
@@ -88,13 +99,12 @@
 
   /* ── Modern Navbar Overrides ── */
   .theme-modern nav {
-    background: linear-gradient(135deg, rgba(30, 27, 75, 0.7), rgba(15, 23, 42, 0.8)) !important;
-    backdrop-filter: blur(24px) saturate(180%) !important;
+    background: linear-gradient(135deg, rgba(30, 27, 75, 0.9), rgba(15, 23, 42, 0.95)) !important;
+    backdrop-filter: blur(6px) !important;
     border: 1px solid rgba(129, 140, 248, 0.3) !important;
-    box-shadow: 
-      0 8px 32px rgba(0, 0, 0, 0.4),
-      0 0 0 1px rgba(99, 102, 241, 0.1),
-      inset 0 0 20px rgba(99, 102, 241, 0.05) !important;
+    box-shadow:
+      0 8px 24px rgba(0, 0, 0, 0.35),
+      0 0 0 1px rgba(99, 102, 241, 0.1) !important;
   }
 
   .theme-modern nav Link,
@@ -110,5 +120,56 @@
 
   .theme-modern .outline-text {
     -webkit-text-stroke: 1px rgba(129, 140, 248, 0.5);
+  }
+}
+
+@keyframes scrollLine {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(200%); }
+}
+
+@keyframes orbFloat {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(4%, 6%) scale(1.08); }
+}
+
+@keyframes signalBlink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.35; }
+}
+
+/* Skip offscreen layout/paint work for long project lists */
+main > section {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 800px;
+}
+
+/* Low-end / mobile: kill expensive blur + layered glows */
+.perf-lite nav,
+.perf-lite button {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+.perf-lite.theme-modern::before {
+  background: #020617 !important;
+}
+
+/* Soften transitions on lite devices, but never kill the TV era overlay */
+.perf-lite *:not(.noise-layer):not(.flicker-layer) {
+  transition-duration: 0.15s !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
 }

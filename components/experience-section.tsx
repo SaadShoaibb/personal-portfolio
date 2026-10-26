@@ -1,47 +1,48 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { useEra } from '@/lib/era-context';
 
 const experiences = [
   {
-    role: "Full Stack & Devops Engineer",
-    company: "Evolisyss • Full-time",
-    period: "May 2025 — Present",
-    description: "Responsible for developing Web and Mobile Applications.",
-    tags: ["React.js", "React Native", "DevOps", "Full Stack", "Mobile App Dev"],
+    role: "Full Stack & DevOps Engineer",
+    company: "Pixact Technologies • USA, Remote",
+    period: "Mar 2026 — Present",
+    description:
+      "Developed and shipped cross-platform mobile apps with React Native, Expo, TypeScript, and JavaScript — production features, API integrations, auth, and device-specific functionality. Built supporting backend services and 10+ scalable REST APIs on high-throughput PostgreSQL, and owned builds, CI/CD, and cloud deployments across the product lifecycle.",
+    tags: ["React Native", "Expo", "TypeScript", "PostgreSQL", "CI/CD", "DevOps"],
   },
   {
-    role: "MERN Stack Internee",
-    company: "EYAI VENTURES • Internship",
+    role: "Full Stack & DevOps Engineer",
+    company: "Evolisyss • USA/Canada, Remote",
+    period: "Jan 2025 — Mar 2026",
+    description:
+      "Developed and maintained production web apps across e-commerce, booking, marketplace, and service domains with Next.js, React, Node.js, REST APIs, PostgreSQL, and cloud deployments. Architected secure auth pipelines and automated cloud workflows across 5 distinct client products with isolated production environments.",
+    tags: ["Next.js", "React", "Node.js", "PostgreSQL", "DevOps", "Cloud"],
+  },
+  {
+    role: "MERN Stack Developer",
+    company: "EYAI Ventures • Karachi, Pakistan",
     period: "Jul 2024 — Oct 2024",
-    description: "Worked on-site in Karachi, Pakistan, developing robust MERN stack applications.",
-    tags: ["MongoDB", "Express.js", "React.js", "Node.js"],
-  },
-  {
-    role: "Freelancer",
-    company: "Fiverr • Freelance",
-    period: "Mar 2020 — Jul 2024",
-    description: "Web developer and Web Designer. Delivered high-quality web solutions for diverse global clients.",
-    tags: ["Web Development", "Web Design", "UI/UX", "Freelance"],
+    description:
+      "Engineered responsive e-commerce interfaces for ADMARC, integrating an AI-driven chatbot to automate customer support and lift engagement. Optimized production environments by resolving critical UI/UX bottlenecks and improving load times and usability.",
+    tags: ["MongoDB", "Express.js", "React.js", "Node.js", "E-commerce"],
   },
   {
     role: "Frontend Developer",
-    company: "AdMarc • Part-time",
-    period: "Aug 2022 — Jan 2023",
-    description: "Remotely based in the United States. Responsible for designing and front-end development of E-commerce websites.",
-    tags: ["JavaScript", "Analytical Skills", "Frontend", "E-commerce"],
+    company: "AdMarc • Part-time, Remote",
+    period: "Jan 2024 — Jun 2024",
+    description:
+      "Remotely based with a United States client. Designed and built front-end experiences for e-commerce websites with a focus on polished UI and conversion-minded flows.",
+    tags: ["JavaScript", "Frontend", "E-commerce", "UI/UX"],
   },
 ];
-
-import { useEra } from '@/lib/era-context';
 
 export function ExperienceSection() {
   const { era } = useEra();
 
   return (
     <section className="w-full relative">
-      {/* Floating Image - Right Side */}
-      <div 
+      <div
         className={`absolute right-[-10%] sm:right-[-5%] md:right-0 top-[5%] md:top-[20%] w-[180px] sm:w-[250px] md:w-[350px] lg:w-[450px] transition-all duration-700 pointer-events-none md:pointer-events-auto z-0 -translate-y-8 
           ${era === '1950s' 
             ? 'opacity-20 sm:opacity-30 md:opacity-40 grayscale hover:grayscale-0' 
@@ -49,10 +50,17 @@ export function ExperienceSection() {
           }`}
         style={{ WebkitMaskImage: 'linear-gradient(to bottom, black 60%, transparent 100%)', maskImage: 'linear-gradient(to bottom, black 60%, transparent 100%)' }}
       >
-        <img src="/saad.png" alt="Saad Shoaib" className="w-full h-auto object-contain" />
+        <img
+          src="/saad.png"
+          alt="Saad Shoaib"
+          loading="lazy"
+          decoding="async"
+          width={450}
+          height={600}
+          className="w-full h-auto object-contain"
+        />
       </div>
 
-      {/* Header */}
       <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-20 gap-12">
         <div>
           <h2 className="text-xs uppercase tracking-[0.5em] text-zinc-400 mb-6 font-medium">Experience</h2>
@@ -66,32 +74,23 @@ export function ExperienceSection() {
         </p>
       </div>
 
-      {/* Timeline */}
       <div className="relative z-10">
-        {/* Vertical line */}
         <div className="absolute left-0 md:left-8 top-0 bottom-0 w-px bg-zinc-800/80" />
 
         <div className="flex flex-col gap-0">
           {experiences.map((exp, index) => (
-            <motion.div
+            <div
               key={index}
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6, delay: index * 0.15, ease: [0.16, 1, 0.3, 1] }}
-              viewport={{ once: true, margin: "-50px" }}
               className="group relative pl-10 md:pl-24 py-10 border-b border-zinc-800/40 last:border-b-0"
             >
-              {/* Dot on timeline */}
               <div className="absolute left-0 md:left-8 top-12 -translate-x-1/2">
                 <div className="w-3 h-3 rounded-full bg-zinc-800 border-2 border-zinc-600 group-hover:border-white group-hover:bg-white/20 transition-all duration-500" />
               </div>
 
-              {/* Period badge */}
               <span className="inline-block text-[9px] uppercase tracking-[0.3em] font-bold text-zinc-400 mb-4 px-3 py-1.5 rounded-full border border-zinc-800/60 bg-zinc-900/30">
                 {exp.period}
               </span>
 
-              {/* Role & Company */}
               <h4 className="text-xl md:text-2xl font-bold tracking-tight mb-1 group-hover:text-white transition-colors">
                 {exp.role}
               </h4>
@@ -99,12 +98,10 @@ export function ExperienceSection() {
                 {exp.company}
               </p>
 
-              {/* Description */}
               <p className="text-zinc-400 text-sm leading-relaxed max-w-xl mb-6 font-light">
                 {exp.description}
               </p>
 
-              {/* Tags */}
               <div className="flex flex-wrap gap-2">
                 {exp.tags.map((tag) => (
                   <span
@@ -115,7 +112,7 @@ export function ExperienceSection() {
                   </span>
                 ))}
               </div>
-            </motion.div>
+            </div>
           ))}
         </div>
       </div>

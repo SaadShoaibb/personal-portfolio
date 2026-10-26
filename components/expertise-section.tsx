@@ -1,4 +1,4 @@
-import { Code2, Server, Database, Globe, Cpu, ShieldCheck } from 'lucide-react';
+import { Code2, Server, Database, ShieldCheck } from 'lucide-react';
 
 const skills = [
   {
@@ -46,7 +46,7 @@ export function ExpertiseSection() {
         {skills.map((skill, index) => (
           <div
             key={index}
-            className="group relative p-8 rounded-2xl bg-zinc-900/40 border border-zinc-800/50 hover:border-zinc-500/50 transition-all duration-700"
+            className="group relative p-8 rounded-2xl bg-zinc-900/25 border border-zinc-800/40 hover:border-zinc-500/50 transition-colors duration-500"
           >
             <div className="mb-6 inline-flex p-3 rounded-xl bg-zinc-800/50 text-zinc-400 group-hover:text-white group-hover:bg-zinc-700/50 transition-all duration-500">
               {skill.icon}

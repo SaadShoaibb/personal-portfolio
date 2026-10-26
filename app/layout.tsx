@@ -1,20 +1,15 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Inter } from "next/font/google";
+import { Geist } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 import { Providers } from "@/components/providers";
 import { EraToggle } from "@/components/era-toggle";
 
-const inter = Inter({subsets:['latin'],variable:'--font-sans'});
-
 const geistSans = Geist({
-  variable: "--font-geist-sans",
+  variable: "--font-sans",
   subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+  display: "swap",
+  preload: true,
 });
 
 export const metadata: Metadata = {
@@ -30,8 +25,11 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={cn("h-full", "antialiased", geistSans.variable, geistMono.variable, "font-sans", inter.variable)}
+      className={cn("h-full", "antialiased", geistSans.variable, "font-sans")}
     >
+      <head>
+        <link rel="dns-prefetch" href="https://prod.spline.design" />
+      </head>
       <body className="min-h-full flex flex-col">
         <Providers>
           {children}
